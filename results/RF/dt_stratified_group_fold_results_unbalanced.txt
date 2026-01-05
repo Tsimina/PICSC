@@ -1,0 +1,55 @@
+----------------------------------------------------------------------
+TOP 5 PARAM SETS BY VAL F1:
+class_weight criterion  max_depth max_features  min_samples_leaf  min_samples_split  accuracy  precision  recall  f1 
+        None      gini        NaN         None               1.0                2.0  0.899089        0.0     0.0 0.0 
+        None      gini        NaN         None               1.0                5.0  0.982712        0.0     0.0 0.0 
+        None      gini        NaN         None               1.0               10.0  0.982789        0.0     0.0 0.0 
+        None      gini        NaN         None               1.0                0.1  0.983561        0.0     0.0 0.0 
+        None      gini        NaN         None               2.0                2.0  0.982905        0.0     0.0 0.0 
+----------------------------------------------------------------------
+
+BEST VAL F1: 0.0000
+BEST PARAMS: {'class_weight': None, 'criterion': 'gini', 'max_depth': None, 'max_features': None, 'min_samples_leaf': 1, 'min_samples_split': 2}
+
+============================================================
+FEATURE IMPORTANCE (Decision Tree)
+============================================================
+         feature  importance
+        Bytes_AB    0.362300
+        Bytes_BA    0.209190
+      Duration_s    0.181225
+    Mean_Pkt_Len    0.158821
+         STD_IAT    0.030361
+ Direction_Ratio    0.027440
+    Kurtosis_IAT    0.014020
+Skewness_Pkt_Len    0.013049
+   Total_Packets    0.003594
+
+🌳 Decision tree plot saved to:
+e:\master an 2\picsc proiect\start code\decision_tree_plot.png
+
+============================================================
+FINAL METRICS (GROUPED TEST SET)
+============================================================
+Accuracy : 0.9074
+Precision: 0.0000
+Recall   : 0.0000
+F1-score : 0.0000
+
+Confusion Matrix (rows=actual, cols=pred):
+[[392  40]
+ [  0   0]]
+
+Classification Report:
+              precision    recall  f1-score   support
+
+      Others     1.0000    0.9074    0.9515       432
+     Spotify     0.0000    0.0000    0.0000         0
+
+    accuracy                         0.9074       432
+   macro avg     0.5000    0.4537    0.4757       432
+weighted avg     1.0000    0.9074    0.9515       432
+
+
+🖼️ Confusion matrix image saved to:
+e:\master an 2\picsc proiect\start code\dt_grouped_confusion_matrix.png
