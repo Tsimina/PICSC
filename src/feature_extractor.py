@@ -54,9 +54,6 @@ def calculate_flow_features(flow: CompleteFlow, label: int) -> ExtractedFeatures
             pkts_ba += 1
 
     total_packets = int(len(packets))
-
-    if total_packets < 3:
-        return {}
  
     total_bytes = int(bytes_ab + bytes_ba)
 

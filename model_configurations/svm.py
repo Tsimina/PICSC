@@ -5,16 +5,18 @@ from sklearn.svm import SVC
 from sklearn.decomposition import PCA
 from sklearn.model_selection import StratifiedKFold
 from sklearn.impute import SimpleImputer
-from sklearn.metrics import accuracy_score, classification_report, confusion_matrix
+from sklearn.metrics import accuracy_score, f1_score, classification_report, confusion_matrix
 import os
 from sklearn.preprocessing import StandardScaler
+import matplotlib
+matplotlib.use('Agg')  # Use non-GUI backend to avoid display issues
 import matplotlib.pyplot as plt
 
 
 # Binary classification: Spotify (1) vs Rest (0)
 if __name__ == '__main__':
     # Load dataset
-    dataset_path = '../src/dataset.csv'
+    dataset_path = '../src/dataset_pcap.csv'
     df = pd.read_csv(dataset_path)
     
     # Features: exclude Flow_ID, Source_PCAP, Label
@@ -38,7 +40,7 @@ if __name__ == '__main__':
     skf = StratifiedKFold(n_splits=n_splits, shuffle=True, random_state=42)
     
     Nsim = len(PCA_components) * len(SVM_kernels) * len(Cs)
-    METRIX_ = np.zeros((Nsim, 4))  # UA_train, WA_train, UA_val, WA_val (for binary, UA=WA=accuracy)
+    METRIX_ = np.zeros((Nsim, 4))  # train_acc, val_acc, train_f1, val_f1
     
     best_model = None
     best_val_score = -float('inf')
@@ -52,6 +54,8 @@ if __name__ == '__main__':
             for C in Cs:
                 train_accuracies = []
                 val_accuracies = []
+                train_f1s = []
+                val_f1s = []
                 
                 for fold, (train_idx, val_idx) in enumerate(skf.split(X, y)):
                     X_train, X_val = X[train_idx], X[val_idx]
@@ -82,29 +86,33 @@ if __name__ == '__main__':
                     y_train_pred = model.predict(X_train_pca)
                     y_val_pred = model.predict(X_val_pca)
                     
-                    # Metrics (for binary, accuracy)
+                    # Metrics
                     train_acc = accuracy_score(y_train, y_train_pred)
                     val_acc = accuracy_score(y_val, y_val_pred)
+                    train_f1 = f1_score(y_train, y_train_pred)
+                    val_f1 = f1_score(y_val, y_val_pred)
                     
                     train_accuracies.append(train_acc)
                     val_accuracies.append(val_acc)
+                    train_f1s.append(train_f1)
+                    val_f1s.append(val_f1)
                     
-                    print(f'Fold {fold+1}: Train Acc = {train_acc:.3f}, Val Acc = {val_acc:.3f}')
+                    print(f'Fold {fold+1}: Train Acc = {train_acc:.3f}, Val Acc = {val_acc:.3f}, Train F1 = {train_f1:.3f}, Val F1 = {val_f1:.3f}')
                 
                 # Average over folds
-                UA_train_avg = np.mean(train_accuracies) * 100
-                WA_train_avg = UA_train_avg  # Same for binary
-                UA_val_avg = np.mean(val_accuracies) * 100
-                WA_val_avg = UA_val_avg
+                train_acc_avg = np.mean(train_accuracies) * 100
+                val_acc_avg = np.mean(val_accuracies) * 100
+                train_f1_avg = np.mean(train_f1s) * 100
+                val_f1_avg = np.mean(val_f1s) * 100
                 
                 print(f'PCA: {pca_comp}, Kernel: {SVM_kernel}, C: {C}')
-                print(f'Avg Train Acc: {UA_train_avg:.2f}%, Avg Val Acc: {UA_val_avg:.2f}%\n')
+                print(f'Avg Train Acc: {train_acc_avg:.2f}%, Avg Val Acc: {val_acc_avg:.2f}%, Avg Train F1: {train_f1_avg:.2f}%, Avg Val F1: {val_f1_avg:.2f}%\n')
                 
-                METRIX_[idx_sim, :] = [UA_train_avg, WA_train_avg, UA_val_avg, WA_val_avg]
+                METRIX_[idx_sim, :] = [train_acc_avg, val_acc_avg, train_f1_avg, val_f1_avg]
                 
                 # Update best model
-                if UA_val_avg > best_val_score:
-                    best_val_score = UA_val_avg
+                if val_acc_avg > best_val_score:
+                    best_val_score = val_acc_avg
                     best_model = model
                     best_pca = pca_comp
                     best_kernel = SVM_kernel
@@ -130,10 +138,10 @@ if __name__ == '__main__':
         'PCA_comp': sim_list_pca,
         'Kernel': sim_list_kernels,
         'C': sim_list_Cs,
-        'UA_train [%]': METRIX_[:, 0],
-        'WA_train [%]': METRIX_[:, 1],
-        'UA_val [%]': METRIX_[:, 2],
-        'WA_val [%]': METRIX_[:, 3]
+        'Train_Acc [%]': METRIX_[:, 0],
+        'Val_Acc [%]': METRIX_[:, 1],
+        'Train_F1 [%]': METRIX_[:, 2],
+        'Val_F1 [%]': METRIX_[:, 3]
     })
     
     results_dir = '../results'
@@ -153,14 +161,14 @@ if __name__ == '__main__':
     print(f"Best Validation Accuracy: {best_val_score:.2f}%")
     
     # Print best configuration details
-    best_idx = np.argmax(METRIX_[:, 2])  # index of max UA_val
+    best_idx = np.argmax(METRIX_[:, 1])  # index of max val_acc
     print(f"\nBest Configuration Details:")
     print(f"SIM: {sim_list_idx[best_idx]}")
     print(f"PCA Components: {sim_list_pca[best_idx]}")
     print(f"Kernel: {sim_list_kernels[best_idx]}")
     print(f"C: {sim_list_Cs[best_idx]}")
-    print(f"Train UA: {METRIX_[best_idx, 0]:.2f}%, Train WA: {METRIX_[best_idx, 1]:.2f}%")
-    print(f"Val UA: {METRIX_[best_idx, 2]:.2f}%, Val WA: {METRIX_[best_idx, 3]:.2f}%")
+    print(f"Train Acc: {METRIX_[best_idx, 0]:.2f}%, Val Acc: {METRIX_[best_idx, 1]:.2f}%")
+    print(f"Train F1: {METRIX_[best_idx, 2]:.2f}%, Val F1: {METRIX_[best_idx, 3]:.2f}%")
     
     # Retrain best model on full data and compute confusion matrix
     scaler_full = StandardScaler()

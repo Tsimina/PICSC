@@ -37,6 +37,7 @@ def main():
 
     random.seed(args.seed)
 
+
     pcap_dir = Path(args.pcap_dir)
 
     # IMPORTANT: căutare RECURSIVĂ (dataseturile au des subfoldere)
