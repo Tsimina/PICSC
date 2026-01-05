@@ -1,0 +1,21 @@
+=== Best Model Summary ===
+Best Hyperparameters: PCA=6, Kernel=rbf, C=1
+Best Validation Accuracy: 79.78%
+
+Best Configuration Details:
+SIM: 616
+PCA Components: 6
+Kernel: rbf
+C: 1
+Train Acc: 83.21%, Val Acc: 79.78%
+Train F1: 84.59%, Val F1: 81.16%
+
+Classification Report:
+              precision    recall  f1-score   support
+
+        Rest       0.92      0.74      0.82       131
+     Spotify       0.78      0.93      0.85       131
+
+    accuracy                           0.84       262
+   macro avg       0.85      0.84      0.83       262
+weighted avg       0.85      0.84      0.83       262
