@@ -69,8 +69,8 @@ if __name__ == '__main__':
     best_mf = None
 
     # Hyperparameters
-    estimators = list(range(5, 55, 5))
-    min_samples_split = [2, 3, 5]
+    estimators = list(range(5, 100, 10))
+    min_samples_split = [3, 5]
     max_depth = list(range(5, 15))
     min_samples_leaf = [1, 3]
     max_samples = [0.7, 0.9]
@@ -224,7 +224,7 @@ if __name__ == '__main__':
     
     # Save best model
     import joblib
-    model_path = os.path.join(results_dir, 'best_rf_model_300.pth')
+    model_path = os.path.join(results_dir, 'best_rf_model_600.pth')
     joblib.dump(best_model_full, model_path)
     print(f"Best model saved to {model_path}")
     
@@ -254,7 +254,7 @@ if __name__ == '__main__':
                      color="white" if cm[i, j] > thresh else "black")
     
     # Save the plot
-    plot_path = os.path.join(results_dir, 'rf_confusion_matrix_300.png')
+    plot_path = os.path.join(results_dir, 'rf_confusion_matrix_600.png')
     plt.savefig(plot_path)
     print(f"Confusion matrix plot saved to {plot_path}")
     plt.close()

@@ -1,0 +1,25 @@
+=== Best Model Summary ===
+Best Hyperparameters: Estimators=75, Min Samples Split=3, Max Depth=12, Min Samples Leaf=1, Max Samples=0.9, Max Features=sqrt
+Best Validation Accuracy: 97.30%
+
+Best Configuration Details:
+SIM: 1178
+Estimators: 75
+Min Samples Split: 3
+Max Depth: 12
+Min Samples Leaf: 1
+Max Samples: 0.9
+Max Features: sqrt
+Train Acc: 98.92%, Val Acc: 97.30%
+Train F1: 98.40%, Val F1: 96.07%
+Best model saved to ../results\best_rf_model_600.pth
+
+Classification Report:
+              precision    recall  f1-score   support
+
+        Rest       1.00      0.98      0.99      1756
+     Spotify       0.97      1.00      0.98       878
+
+    accuracy                           0.99      2634
+   macro avg       0.98      0.99      0.99      2634
+weighted avg       0.99      0.99      0.99      2634
