@@ -17,7 +17,7 @@ from xgboost import XGBClassifier
 
 warnings.filterwarnings("ignore")
 
-FILEPATH = '../extracted_features/dataset_timeout600_flow60_balanced_streaming.csv'
+FILEPATH = '../extracted_features/dataset_timeout600_flow60.csv'
 RANDOM_STATE = 42
 
 
@@ -274,7 +274,7 @@ def main():
 
     script_dir = os.path.dirname(os.path.abspath(__file__))
 
-    cm_path = os.path.join(script_dir, "xgb_confusion_matrix_binary_spotify_results_timeout600_flow60_balanced_streaming.png")
+    cm_path = os.path.join(script_dir, "xgb_confusion_matrix_binary_spotify_results_timeout600_flow60_streaming.png")
     plot_confusion_matrix(
         cm_all,
         class_names=["Rest", "Spotify"],
@@ -294,7 +294,7 @@ def main():
         plt.title("XGBoost — Grouped CV ROC (OOF)")
         plt.legend(loc="lower right")
         plt.tight_layout()
-        roc_path = os.path.join(script_dir, "xgb_roc_binary_spotify_results_timeout600_flow60_balanced.png")
+        roc_path = os.path.join(script_dir, "xgb_roc_binary_spotify_results_timeout600_flow60.png")
         plt.savefig(roc_path, dpi=200)
         plt.show()
     else:
