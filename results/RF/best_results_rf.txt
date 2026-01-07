@@ -14,7 +14,7 @@
 
 All database 
 
-RF - 15s flow activ timeout 600s
+15s flow activ timeout 600s
 
 === Best Model Summary ===
 Best Hyperparameters: Estimators=30, Min Samples Split=5, Max Depth=8, Min Samples Leaf=1, Max Samples=0.9, Max Features=log2
@@ -42,7 +42,7 @@ Classification Report:
    macro avg       0.98      0.98      0.98      1714
 weighted avg       0.98      0.98      0.98      1714
 
-RF - 60s flow activ timeout 600s
+60s flow activ timeout 600s
 
 === Best Model Summary ===
 Best Hyperparameters: Estimators=15, Min Samples Split=2, Max Depth=8, Min Samples Leaf=1, Max Samples=0.9, Max Features=sqrt
@@ -75,7 +75,7 @@ weighted avg       0.98      0.98      0.98      1112
 
 Only Streaming data - Ntflix, Spotify, Youtube, Vimeo
 
-RF - 15s active flow,  idle timeout 600s
+15s active flow,  idle timeout 600s
 
 === Best Model Summary ===
 Best Hyperparameters: Estimators=35, Min Samples Split=5, Max Depth=14, Min Samples Leaf=3, Max Samples=0.9, Max Features=log2
@@ -103,7 +103,7 @@ Classification Report:
    macro avg       0.89      0.88      0.88      1786
 weighted avg       0.89      0.88      0.88      1786
 
-RF - 60s active flow,  idle timeout 600s
+60s active flow,  idle timeout 600s
 
 === Best Model Summary ===
 Best Hyperparameters: Estimators=25, Min Samples Split=3, Max Depth=13, Min Samples Leaf=1, Max Samples=0.9, Max Features=sqrt
