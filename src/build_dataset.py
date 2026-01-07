@@ -25,13 +25,13 @@ def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--pcap_dir", type=str, required=True, help="Director (poate conține subfoldere) cu .pcap/.pcapng")
     ap.add_argument("--out", type=str, required=True, help="Calea CSV de ieșire")
-    ap.add_argument("--timeout", type=float, default=60.0, help="Flow timeout în secunde (default 600)")
-    ap.add_argument("--active_duration", "--flow_duration", dest="active_duration", type=float, default=30.0,
+    ap.add_argument("--timeout", type=float, default=600.0, help="Flow timeout în secunde (default 600)")
+    ap.add_argument("--active_duration", "--flow_duration", dest="active_duration", type=float, default=None,
                     help="Segment active flows into fixed-duration windows in seconds (e.g., 15). Omit or set to None to disable.")
 
     # Balancing
     ap.add_argument("--nonspotify_ratio", type=float, default=1.0,
-                    help="Câte exemple NON-Spotify păstrezi relativ la Spotify (1.0=egal, 2.0=de 2 ori mai multe).")
+                    help="Câte exemple NON-Spotify păstrezi relativ la Spotify (1.0=egal, 2.0=de 2 ori mai multe). If set to 0, keeps all non-Spotify samples.")
     ap.add_argument("--max_nonspotify_per_pcap", type=int, default=0,
                     help="Limitează câte flow-uri NON-Spotify păstrezi per fișier (0=fără limită).")
     ap.add_argument("--seed", type=int, default=42, help="Seed pentru subsampling (reproductibil).")
