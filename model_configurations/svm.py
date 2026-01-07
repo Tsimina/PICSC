@@ -16,7 +16,7 @@ import matplotlib.pyplot as plt
 # Binary classification: Spotify (1) vs Rest (0)
 if __name__ == '__main__':
     # Load dataset
-    dataset_path = '../extracted_features/dataset_timeout_300.csv'
+    dataset_path = '../extracted_features//dataset_timeout600_flow60_balanced.csv'
     df = pd.read_csv(dataset_path)
     
     # Features: exclude Flow_ID, Source_PCAP, Label
@@ -146,13 +146,13 @@ if __name__ == '__main__':
     
     results_dir = '../results'
     os.makedirs(results_dir, exist_ok=True)
-    results_path = os.path.join(results_dir, 'SVM_binary_spotify_results_600.csv')
+    results_path = os.path.join(results_dir, 'SVM_binary_spotify_results_timeout600_flow60_balanced.csv')
     df_results.to_csv(results_path, index=False)
     print(f"Results saved to {results_path}")
     
     # Save best model
     import joblib
-    model_path = os.path.join(results_dir, 'best_svm_model_600.pth')
+    model_path = os.path.join(results_dir, 'best_svm_model_60.pth')
     joblib.dump(best_model, model_path)
     print(f"Best model saved to {model_path}")
     
@@ -210,7 +210,7 @@ if __name__ == '__main__':
                      color="white" if cm[i, j] > thresh else "black")
     
     # Save the plot
-    plot_path = os.path.join(results_dir, 'svm_confusion_matrix_600.png')
+    plot_path = os.path.join(results_dir, 'svm_confusion_matrix_timeout600_flow15_balanced.png')
     plt.savefig(plot_path)
     print(f"Confusion matrix plot saved to {plot_path}")
     plt.close()
