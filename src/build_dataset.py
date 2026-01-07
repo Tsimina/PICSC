@@ -26,7 +26,7 @@ def main():
     ap.add_argument("--pcap_dir", type=str, required=True, help="Director (poate conține subfoldere) cu .pcap/.pcapng")
     ap.add_argument("--out", type=str, required=True, help="Calea CSV de ieșire")
     ap.add_argument("--timeout", type=float, default=600.0, help="Flow timeout în secunde (default 600)")
-    ap.add_argument("--active_duration", "--flow_duration", dest="active_duration", type=float, default=None,
+    ap.add_argument("--active_duration", "--flow_duration", dest="active_duration", type=float, default=60.0,
                     help="Segment active flows into fixed-duration windows in seconds (e.g., 15). Omit or set to None to disable.")
 
     # Balancing

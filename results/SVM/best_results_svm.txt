@@ -1,0 +1,118 @@
+python build_dataset.py --pcap_dir C:/Users/Simina/Desktop/Master_an_2/PICSC/Dataset --out dataset_timeout600_flow15.csv --nonspotify_ratio 1.0
+
+[SUMMARY]
+  Spotify rows     : 857
+  Non-Spotify rows : 857
+  Total rows       : 1714
+
+[SUMMARY]-60s
+  Spotify rows     : 556
+  Non-Spotify rows : 556
+  Total rows       : 1112
+
+==================================================================================================================================
+
+All database 
+
+SVM - 15s flow activ timeout 600s 
+
+=== Best Model Summary ===
+Best Hyperparameters: PCA=28, Kernel=linear, C=1
+Best Validation Accuracy: 82.44%
+
+Best Configuration Details:
+SIM: 14
+PCA Components: 28
+Kernel: linear
+C: 1
+Train Acc: 82.45%, Val Acc: 82.44%
+Train F1: 81.35%, Val F1: 81.31%
+
+Classification Report:
+              precision    recall  f1-score   support
+
+        Rest       0.79      0.88      0.83       857
+     Spotify       0.87      0.77      0.81       857
+
+    accuracy                           0.82      1714
+   macro avg       0.83      0.82      0.82      1714
+weighted avg       0.83      0.82      0.82      1714
+
+
+SVM - 60s flow activ timeout 600s 
+
+=== Best Model Summary ===
+Best Hyperparameters: PCA=28, Kernel=rbf, C=1
+Best Validation Accuracy: 86.24%
+
+Best Configuration Details:
+SIM: 0
+PCA Components: 28
+Kernel: rbf
+C: 1
+Train Acc: 86.53%, Val Acc: 86.24%
+Train F1: 86.62%, Val F1: 86.32%
+
+Classification Report:
+              precision    recall  f1-score   support
+
+        Rest       0.87      0.86      0.87       556
+     Spotify       0.86      0.87      0.87       556
+
+    accuracy                           0.87      1112
+   macro avg       0.87      0.87      0.87      1112
+weighted avg       0.87      0.87      0.87      1112
+
+==================================================================================================================================
+
+Only Streaming data - Ntflix, Spotify, Youtube, Vimeo
+
+SVM - 15s active flow,  idle timeout 600s
+
+=== Best Model Summary ===
+Best Hyperparameters: PCA=7, Kernel=rbf, C=1
+Best Validation Accuracy: 62.60%
+
+Best Configuration Details:
+SIM: 588
+PCA Components: 7
+Kernel: rbf
+C: 1
+Train Acc: 63.12%, Val Acc: 62.60%
+Train F1: 50.82%, Val F1: 48.93%
+
+Classification Report:
+              precision    recall  f1-score   support
+
+        Rest       0.58      0.94      0.72       893
+     Spotify       0.84      0.31      0.46       893
+
+    accuracy                           0.63      1786
+   macro avg       0.71      0.63      0.59      1786
+weighted avg       0.71      0.63      0.59      1786
+
+
+SVM - 60s active flow,  idle timeout 600s
+
+=== Best Model Summary ===
+Best Hyperparameters: PCA=7, Kernel=rbf, C=1
+Best Validation Accuracy: 67.62%
+
+Best Configuration Details:
+SIM: 588
+PCA Components: 7
+Kernel: rbf
+C: 1
+Train Acc: 68.86%, Val Acc: 67.62%
+Train F1: 68.76%, Val F1: 67.39%
+
+Classification Report:
+              precision    recall  f1-score   support
+
+        Rest       0.70      0.70      0.70       556
+     Spotify       0.70      0.70      0.70       556
+
+    accuracy                           0.70      1112
+   macro avg       0.70      0.70      0.70      1112
+weighted avg       0.70      0.70      0.70      1112
+
