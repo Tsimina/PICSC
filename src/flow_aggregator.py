@@ -3,10 +3,10 @@
 from typing import Iterator, Dict, Any, List, Tuple, Optional
 from pcap_ingest import FlowKey, ParsedPacket, NormalizedPacket
 
-# Timeout-ul standard ISCX pentru inactivitate (10 minute)
+# Standard flow timeout în seconds
 FLOW_TIMEOUT_SECONDS = 600.0
 
-# Tipul de date pentru a reprezenta un flux complet
+# Data type for a complete flow summary
 CompleteFlow = Dict[str, Any]
 
 def aggregate_flows(
@@ -15,20 +15,6 @@ def aggregate_flows(
     include_packets: bool = True,
     max_active_duration: Optional[float] = None,
 ) -> Iterator[CompleteFlow]:
-    """
-    Generator care reconstruiește fluxurile complete dintr-un stream de pachete.
-
-    Comportament:
-    - `timeout` este timpul de inactivitate (în secunde) care determină închiderea
-      fluxurilor (comportament ISCX, implicit 600s).
-    - `max_active_duration` (opțional) segmentează un flux activ în ferestre de
-      durată fixă (de ex. 15s). Aceasta este diferită de timeout-ul de inactivitate
-      și determină flush-ul unui segment activ când durata segmentului depășește
-      valoarea specificată; ulterior se pornește un nou segment pentru același
-      `flow_key`.
-
-    `include_packets=True` păstrează lista completă de pachete în output (utilă pt feature-uri).
-    """
 
     active_flows: Dict[FlowKey, List[ParsedPacket]] = {}
     flow_init_direction: Dict[FlowKey, Tuple[str, int]] = {}
@@ -36,7 +22,7 @@ def aggregate_flows(
     for flow_key, packet in normalized_packets:
         current_time = float(packet["timestamp"])
 
-        # Închide fluxurile inactive (prin timeout)
+        # Close timed-out flows
         keys_to_close: List[FlowKey] = []
         for key, pkts in active_flows.items():
             if pkts and (current_time - float(pkts[-1]["timestamp"])) > timeout:
@@ -67,7 +53,7 @@ def aggregate_flows(
 
             yield flow_summary
 
-        # Segmentare pe durată activă (dacă este setată)
+        # Active duration segmentation
         if flow_key in active_flows and max_active_duration is not None:
             pkts = active_flows[flow_key]
             if pkts:
@@ -99,7 +85,7 @@ def aggregate_flows(
 
                     yield flow_summary
 
-        # Dacă nu există un flux activ pentru cheia curentă, inițializează unul nou
+        # If new flow, initialize
         if flow_key not in active_flows:
             active_flows[flow_key] = []
             flow_init_direction[flow_key] = (packet["ip_src"], int(packet["sport"]))

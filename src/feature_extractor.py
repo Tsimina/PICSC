@@ -6,15 +6,11 @@ import hashlib
 from typing import Dict, Any, Iterator
 from flow_aggregator import CompleteFlow
 
-# Tipul de date pentru feature-uri extrase
+# Data type for extracted features
 ExtractedFeatures = Dict[str, Any]
 
-
+# Function to calculate statistical features for a given flow
 def calculate_statistical_features(flow: CompleteFlow, label: int) -> ExtractedFeatures:
-    """
-    Calculează setul de feature-uri compatibil cu scriptul furnizat de tine.
-    Returnează un dicționar cu aceleași chei (ordine nespecificată) folosite pentru CSV.
-    """
     packets = flow.get('packets', [])
     if not packets:
         return {}
@@ -70,11 +66,8 @@ def calculate_statistical_features(flow: CompleteFlow, label: int) -> ExtractedF
 
     return features
 
-
+# Generator function to extract features from all flows
 def extract_all_features(flows_generator: Iterator[CompleteFlow], label: int) -> Iterator[ExtractedFeatures]:
-    """
-    Generator care aplică funcția de calcul feature pentru fiecare flux complet.
-    """
     for flow in flows_generator:
         feats = calculate_statistical_features(flow, label=label)
         if feats:

@@ -2,21 +2,20 @@ from scapy.all import IP, TCP, UDP
 from scapy.utils import PcapReader
 from typing import Iterator, Dict, Any, Tuple
 
+# Data types
 FlowKey = Tuple[str, ...]
 ParsedPacket = Dict[str, Any]
 NormalizedPacket = Tuple[FlowKey, ParsedPacket]
 
+# Generator function to read and parse packets from a PCAP/PCAPNG file
 def pcap_reader_generator(filepath: str) -> Iterator[ParsedPacket]:
-    """
-    Generator streaming: citește pachetele din PCAP/PCAPNG fără să încarce tot fișierul în RAM.
-    """
     try:
         reader = PcapReader(filepath)
     except FileNotFoundError:
-        print(f"Eroare: Fișierul PCAP nu a fost găsit la {filepath}")
+        print(f"Error: No pcap file was found in {filepath}")
         return
     except Exception as e:
-        print(f"Eroare la deschiderea PCAP/PCAPNG: {e}")
+        print(f"Error when downloading: {e}")
         return
 
     try:
@@ -46,14 +45,8 @@ def pcap_reader_generator(filepath: str) -> Iterator[ParsedPacket]:
         reader.close()
 
 
-
+# Function to normalize flow key
 def normalize_flow_key(packet: ParsedPacket) -> FlowKey:
-    """
-    Generează o cheie canonică bidirecțională de flux (5-tuple):
-    (ip_low, port_low, ip_high, port_high, proto)
-
-    Cheia este stabilă indiferent de direcția inițială a pachetului.
-    """
     src = (packet["ip_src"], int(packet["sport"]))
     dst = (packet["ip_dst"], int(packet["dport"]))
 

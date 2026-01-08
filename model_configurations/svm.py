@@ -16,7 +16,7 @@ import matplotlib.pyplot as plt
 # Binary classification: Spotify (1) vs Rest (0)
 if __name__ == '__main__':
     # Load dataset
-    dataset_path = '../extracted_features//dataset_timeout600_flow15_balanced_streaming.csv'
+    dataset_path = '../extracted_features/dataset.csv'
     df = pd.read_csv(dataset_path)
     
     # Features: exclude Flow_ID, Source_PCAP, Label

@@ -41,7 +41,7 @@ def getWA(OUT, TAR):
 
 if __name__ == '__main__':
     # Load dataset for Spotify vs Rest
-    dataset_path = '../extracted_features/dataset_timeout600_flow15_balanced_streaming.csv'
+    dataset_path = '../extracted_features/dataset.csv'
     df = pd.read_csv(dataset_path)
     
     # Features: exclude Flow_ID, Source_PCAP, Label
@@ -189,13 +189,12 @@ if __name__ == '__main__':
     df = pd.DataFrame(df_dict)
     results_dir = '../results'
     os.makedirs(results_dir, exist_ok=True)
-    results_path = os.path.join(results_dir, f'RF_binary_spotify_results_timeout600_flow15_balanced_streaming.csv')
+    results_path = os.path.join(results_dir, f'RF_binary_spotify_results.csv')
     # Verifică dacă fișierul există
     if os.path.exists(results_path):
-        # Scrie în fișier folosind append (fără header)
+        # Write without header
         df.to_csv(results_path, mode='a', header=False, index=False)
     else:
-        # Scrie în fișier cu header (pentru prima scriere)
         df.to_csv(results_path, index=False)
   
     print("\n=== Best Model Summary ===")
@@ -221,9 +220,7 @@ if __name__ == '__main__':
                          max_samples=best_ms, max_features=best_mf)
     best_model_full.fit(X, y)
     y_pred_full = best_model_full.predict(X)
-    
-    # Model saving removed per user request
-    
+        
     cm = confusion_matrix(y, y_pred_full)
     print("\nClassification Report:")
     print(classification_report(y, y_pred_full, target_names=['Rest', 'Spotify']))
@@ -250,7 +247,7 @@ if __name__ == '__main__':
                      color="white" if cm[i, j] > thresh else "black")
     
     # Save the plot
-    plot_path = os.path.join(results_dir, 'rf_confusion_matrix_timeout600_flow15_balanced_streaming.png')
+    plot_path = os.path.join(results_dir, 'rf_confusion_matrix.png')
     plt.savefig(plot_path)
     print(f"Confusion matrix plot saved to {plot_path}")
     plt.close()

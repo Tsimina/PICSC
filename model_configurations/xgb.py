@@ -17,10 +17,11 @@ from xgboost import XGBClassifier
 
 warnings.filterwarnings("ignore")
 
-FILEPATH = '../extracted_features/dataset_timeout600_flow60.csv'
+# Configuration
+FILEPATH = '../extracted_features/dataset.csv'
 RANDOM_STATE = 42
 
-
+# Function to pick group column
 def pick_group_column(df: pd.DataFrame) -> str:
     candidates = ["Source_File", "Source_PCAP", "pcap", "pcap_file", "Pcap_File"]
     for c in candidates:
@@ -31,14 +32,14 @@ def pick_group_column(df: pd.DataFrame) -> str:
         f"{candidates}. Add one (e.g., Source_File=pcap name) to avoid leakage."
     )
 
-
+# Function to coerce specified columns to numeric
 def coerce_numeric_dataframe(df: pd.DataFrame, cols):
     out = df.copy()
     for c in cols:
         out[c] = pd.to_numeric(out[c], errors="coerce")
     return out
 
-
+# Function to create XGBoost classifier with GPU support if available
 def make_xgb_classifier(scale_pos_weight=1.0, random_state=42):
     base_params = dict(
         objective="binary:logistic",
@@ -63,7 +64,7 @@ def make_xgb_classifier(scale_pos_weight=1.0, random_state=42):
     except Exception:
         return XGBClassifier(**base_params)
 
-
+# Function to plot confusion matrix
 def plot_confusion_matrix(cm, class_names, title, out_path):
     fig, ax = plt.subplots(figsize=(6, 5))
     im = ax.imshow(cm, cmap="Blues")
@@ -83,7 +84,7 @@ def plot_confusion_matrix(cm, class_names, title, out_path):
     plt.show()
     plt.close(fig)
 
-
+# Main execution
 def main():
     print("=" * 70)
     print("SPOTIFY vs REST — XGBoost + StratifiedGroupKFold + GridSearchCV")
@@ -95,7 +96,7 @@ def main():
         raise ValueError("Expected a 'Label' column (Spotify vs Rest).")
 
     group_col = pick_group_column(df)
-    # support both numeric labels (1 = Spotify, 0 = Rest) and string labels ("Spotify")
+    # support both numeric labels (1 = Spotify, 0 = Rest) and string labels
     lbl = df["Label"]
     if lbl.dtype == object or lbl.dtype.name == "category":
         df["target"] = lbl.astype(str).str.strip().str.lower().eq("spotify").astype(int)
@@ -124,6 +125,7 @@ def main():
     base_model = make_xgb_classifier(scale_pos_weight=spw_all, random_state=RANDOM_STATE)
     pipe_for_gs = Pipeline(steps=[("preprocess", preprocess), ("model", base_model)])
 
+    # Hyperparameter grid for GridSearchCV
     param_grid = {
         "model__max_depth":        [4, 6, 8],
         "model__learning_rate":    [0.10, 0.05],
@@ -147,6 +149,7 @@ def main():
 
     grid_search.fit(X, y, groups=groups)
 
+    # Summary of grid search results
     print("\n=== GRID SEARCH SUMMARY ===")
     print(f"Best mean CV AUC: {grid_search.best_score_:.4f}")
     print("Best params:")
@@ -274,7 +277,7 @@ def main():
 
     script_dir = os.path.dirname(os.path.abspath(__file__))
 
-    cm_path = os.path.join(script_dir, "xgb_confusion_matrix_binary_spotify_results_timeout600_flow60_streaming.png")
+    cm_path = os.path.join(script_dir, "xgb_confusion_matrix.png")
     plot_confusion_matrix(
         cm_all,
         class_names=["Rest", "Spotify"],
@@ -294,7 +297,7 @@ def main():
         plt.title("XGBoost — Grouped CV ROC (OOF)")
         plt.legend(loc="lower right")
         plt.tight_layout()
-        roc_path = os.path.join(script_dir, "xgb_roc_binary_spotify_results_timeout600_flow60.png")
+        roc_path = os.path.join(script_dir, "xgb_roc.png")
         plt.savefig(roc_path, dpi=200)
         plt.show()
     else:
@@ -355,7 +358,7 @@ def main():
         cm_out = os.path.join(script_dir, "xgb_confusion_matrix.csv")
         pd.DataFrame(cm_all, index=["Rest", "Spotify"], columns=["Rest", "Spotify"]).to_csv(cm_out)
 
-        oof_out = os.path.join(script_dir, "XGB_oof_predictions_binary_spotify_results_timeout600_flow60_balanced_streaming.csv")
+        oof_out = os.path.join(script_dir, "XGB_oof_predictions.csv")
         pd.DataFrame({
             group_col: groups,
             "true": y,
