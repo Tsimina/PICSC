@@ -16,7 +16,6 @@ The system extracts statistical and temporal flow-based features from PCAP files
 - [Installation](#installation)
 - [Usage](#usage)
 - [Performance](#performance)
-- [
 - [Limitation](#limitation)
 - [Acknoledgments](#acknoledgments)
 
@@ -339,7 +338,7 @@ flow aggregation windows. Results are reported on **balanced datasets**
 
 ---
 
-## Key Observations
+### Key Observations
 
 - **Random Forest** achieved the best overall performance across all configurations.
 - **XGBoost** showed strong and stable results, especially in terms of AUC.
@@ -360,8 +359,6 @@ Specifically:
 - **SVM** also performs significantly better on the full dataset compared to streaming-only data
 
 These results indicate that **Spotify traffic is more easily distinguishable when contrasted against a diverse set of non-Spotify applications** (chat, VoIP, file transfer, web, etc.).
-
----
 
 ### Streaming-Only Dataset Performance
 
