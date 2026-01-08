@@ -23,7 +23,7 @@ def infer_label_from_name(name: str) -> int:
 
 def main():
     ap = argparse.ArgumentParser()
-    ap.add_argument("--pcap_dir", type=str, required=True, help="Pcaps input directory")
+    ap.add_argument("--pcap_dir", type=str, required=True, help="PCAP/PCAPNG input directory")
     ap.add_argument("--out", type=str, required=True, help="Dataset output CSV file path")
     ap.add_argument("--timeout", type=float, default=600.0, help="Idle flow timeout in seconds (default: 600s)")
     ap.add_argument("--active_duration", "--flow_duration", dest="active_duration", type=float, default= None,
