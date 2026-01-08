@@ -41,7 +41,7 @@ def getWA(OUT, TAR):
 
 if __name__ == '__main__':
     # Load dataset for Spotify vs Rest
-    dataset_path = '../extracted_features/dataset.csv'
+    dataset_path = '../extracted_features/../dataset.csv'
     df = pd.read_csv(dataset_path)
     
     # Features: exclude Flow_ID, Source_PCAP, Label

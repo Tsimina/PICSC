@@ -16,7 +16,7 @@ import matplotlib.pyplot as plt
 # Binary classification: Spotify (1) vs Rest (0)
 if __name__ == '__main__':
     # Load dataset
-    dataset_path = '../extracted_features/dataset.csv'
+    dataset_path = '../extracted_features/../dataset.csv'
     df = pd.read_csv(dataset_path)
     
     # Features: exclude Flow_ID, Source_PCAP, Label
@@ -146,7 +146,7 @@ if __name__ == '__main__':
     
     results_dir = '../results'
     os.makedirs(results_dir, exist_ok=True)
-    results_path = os.path.join(results_dir, 'SVM_binary_spotify_results_timeout600_flow15_balanced_streaming.csv')
+    results_path = os.path.join(results_dir, 'SVM_binary_spotify_results.csv')
     df_results.to_csv(results_path, index=False)
     print(f"Results saved to {results_path}")
     
@@ -205,7 +205,7 @@ if __name__ == '__main__':
                      color="white" if cm[i, j] > thresh else "black")
     
     # Save the plot
-    plot_path = os.path.join(results_dir, 'svm_confusion_matrix_timeout600_flow15_balanced_streaming.png')
+    plot_path = os.path.join(results_dir, 'svm_confusion_matrix.png')
     plt.savefig(plot_path)
     print(f"Confusion matrix plot saved to {plot_path}")
     plt.close()
