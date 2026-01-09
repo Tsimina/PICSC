@@ -18,7 +18,7 @@ from xgboost import XGBClassifier
 warnings.filterwarnings("ignore")
 
 # Configuration
-FILEPATH = '../extracted_features/dataset_flow60_arff.csv'
+FILEPATH = '../extracted_features/../dataset.csv'
 RANDOM_STATE = 42
 
 # Function to pick group column
@@ -275,9 +275,9 @@ def main():
         target_names = ["Spotify"] if single == 1 else ["Rest"]
     print(classification_report(y, oof_pred, labels=labels, target_names=target_names, digits=4, zero_division=0))
 
-    script_dir = os.path.dirname(os.path.abspath(__file__))
+    results_dir = '../results'
 
-    cm_path = os.path.join(script_dir, "xgb_confusion_matrix.png")
+    cm_path = os.path.join(results_dir, "xgb_confusion_matrix.png")
     plot_confusion_matrix(
         cm_all,
         class_names=["Rest", "Spotify"],
@@ -297,7 +297,7 @@ def main():
         plt.title("XGBoost — Grouped CV ROC (OOF)")
         plt.legend(loc="lower right")
         plt.tight_layout()
-        roc_path = os.path.join(script_dir, "xgb_roc.png")
+        roc_path = os.path.join(results_dir, "xgb_roc.png")
         plt.savefig(roc_path, dpi=200)
         plt.show()
     else:
@@ -332,13 +332,13 @@ def main():
     plt.show()
 
     try:
-        cv_results_out = os.path.join(script_dir, "xgb_grid_search_cv_results.csv")
+        cv_results_out = os.path.join(results_dir, "xgb_grid_search_cv_results.csv")
         cv_results.to_csv(cv_results_out, index=False)
 
-        folds_out = os.path.join(script_dir, "xgb_groupcv_folds.csv")
+        folds_out = os.path.join(results_dir, "xgb_groupcv_folds.csv")
         pd.DataFrame(fold_rows).to_csv(folds_out, index=False)
 
-        overall_out = os.path.join(script_dir, "xgb_groupcv_overall.csv")
+        overall_out = os.path.join(results_dir, "xgb_groupcv_overall.csv")
         overall_record = {
             "AUC": overall["AUC"],
             "Accuracy": overall["Accuracy"],
@@ -352,13 +352,13 @@ def main():
         }
         pd.DataFrame([overall_record]).to_csv(overall_out, index=False)
 
-        imp_out = os.path.join(script_dir, "xgb_feature_importances.csv")
+        imp_out = os.path.join(results_dir, "xgb_feature_importances.csv")
         imp_df.to_csv(imp_out, index=False)
 
-        cm_out = os.path.join(script_dir, "xgb_confusion_matrix.csv")
+        cm_out = os.path.join(results_dir, "xgb_confusion_matrix.csv")
         pd.DataFrame(cm_all, index=["Rest", "Spotify"], columns=["Rest", "Spotify"]).to_csv(cm_out)
 
-        oof_out = os.path.join(script_dir, "XGB_oof_predictions.csv")
+        oof_out = os.path.join(results_dir, "XGB_oof_predictions.csv")
         pd.DataFrame({
             group_col: groups,
             "true": y,

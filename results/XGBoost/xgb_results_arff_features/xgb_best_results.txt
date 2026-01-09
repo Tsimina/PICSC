@@ -43,75 +43,24 @@ Best XGBoost params (clean):
 Running 5-fold StratifiedGroupKFold with tuned params (OOF predictions)...
 
 === 5-FOLD GROUPED CV (OOF) RESULTS ===
-Fold 1: AUC=0.833 | Acc=0.698 | P=0.920 | R/Sens=0.691 | Spec=0.732 | F1=0.789 (Pos=317, Neg=71)
-Fold 2: AUC=0.943 | Acc=0.873 | P=0.854 | R/Sens=0.732 | Spec=0.940 | F1=0.788 (Pos=231, Neg=486)
-Fold 3: AUC=nan | Acc=0.688 | P=0.000 | R/Sens=0.000 | Spec=0.688 | F1=0.000 (Pos=0, Neg=16)
-Fold 4: AUC=nan | Acc=0.000 | P=0.000 | R/Sens=0.000 | Spec=0.000 | F1=0.000 (Pos=0, Neg=1)
-Fold 5: AUC=0.951 | Acc=0.833 | P=0.777 | R/Sens=0.952 | Spec=0.704 | F1=0.856 (Pos=330, Neg=304)
+Fold 1: AUC=nan | Acc=0.625 | P=0.000 | R/Sens=0.000 | Spec=0.625 | F1=0.000 (Pos=0, Neg=16)
+Fold 2: AUC=0.948 | Acc=0.942 | P=0.956 | R/Sens=0.981 | Spec=0.611 | F1=0.968 (Pos=154, Neg=18)
+Fold 3: AUC=0.976 | Acc=0.884 | P=0.976 | R/Sens=0.750 | Spec=0.986 | F1=0.848 (Pos=108, Neg=143)
+Fold 4: AUC=0.914 | Acc=0.971 | P=0.969 | R/Sens=1.000 | Spec=0.667 | F1=0.984 (Pos=31, Neg=3)
+Fold 5: AUC=nan | Acc=0.788 | P=0.000 | R/Sens=0.000 | Spec=0.788 | F1=0.000 (Pos=0, Neg=113)
 
 OVERALL OOF METRICS (grouped by PCAP/source):
-AUC=0.9228 | Accuracy=0.8178 | Precision=0.8298 | Recall/Sens=0.7995 | Specificity=0.8360 | F1=0.8144
+AUC=0.9664 | Accuracy=0.8805 | Precision=0.8680 | Recall/Sens=0.8976 | Specificity=0.8635 | F1=0.8826
 
 Classification report (OOF):
               precision    recall  f1-score   support
 
-        Rest     0.8066    0.8360    0.8210       878
-     Spotify     0.8298    0.7995    0.8144       878
+        Rest     0.8940    0.8635    0.8785       293
+     Spotify     0.8680    0.8976    0.8826       293
 
-    accuracy                         0.8178      1756
-   macro avg     0.8182    0.8178    0.8177      1756
-weighted avg     0.8182    0.8178    0.8177      1756
-
-
-60s flow activ timeout 600s
-
-=== GRID SEARCH SUMMARY ===
-Best mean CV AUC: nan
-Best params:
-  model__colsample_bytree: 0.6
-  model__learning_rate: 0.1
-  model__max_depth: 4
-  model__n_estimators: 400
-  model__subsample: 0.6
-
-Top 5 parameter sets by mean AUC:
- mean_test_score  std_test_score  param_model__max_depth  param_model__learning_rate  param_model__n_estimators  param_model__subsample  param_model__colsample_bytree
-             NaN             NaN                       4                         0.1                        400                     0.6                            0.6
-             NaN             NaN                       4                         0.1                        400                     0.8                            0.6
-             NaN             NaN                       4                         0.1                        400                     1.0                            0.6
-             NaN             NaN                       4                         0.1                        800                     0.6                            0.6
-             NaN             NaN                       4                         0.1                        800                     0.8                            0.6
-
-Best XGBoost params (clean):
-  n_estimators: 400
-  learning_rate: 0.1
-  max_depth: 4
-  subsample: 0.6
-  colsample_bytree: 0.6
-  min_child_weight: 1.0
-  reg_lambda: 1.0
-
-Running 5-fold StratifiedGroupKFold with tuned params (OOF predictions)...
-
-=== 5-FOLD GROUPED CV (OOF) RESULTS ===
-Fold 1: AUC=0.797 | Acc=0.901 | P=0.976 | R/Sens=0.920 | Spec=0.467 | F1=0.947 (Pos=349, Neg=15)
-Fold 2: AUC=nan | Acc=0.865 | P=0.000 | R/Sens=0.000 | Spec=0.865 | F1=0.000 (Pos=0, Neg=245)
-Fold 3: AUC=0.995 | Acc=0.966 | P=0.966 | R/Sens=0.957 | Spec=0.973 | F1=0.961 (Pos=207, Neg=260)
-Fold 4: AUC=nan | Acc=1.000 | P=0.000 | R/Sens=0.000 | Spec=1.000 | F1=0.000 (Pos=0, Neg=8)
-Fold 5: AUC=nan | Acc=0.821 | P=0.000 | R/Sens=0.000 | Spec=0.821 | F1=0.000 (Pos=0, Neg=28)
-
-OVERALL OOF METRICS (grouped by PCAP/source):
-AUC=0.9575 | Accuracy=0.9191 | Precision=0.9073 | Recall/Sens=0.9335 | Specificity=0.9047 | F1=0.9202
-
-Classification report (OOF):
-              precision    recall  f1-score   support
-
-        Rest     0.9315    0.9047    0.9179       556
-     Spotify     0.9073    0.9335    0.9202       556
-
-    accuracy                         0.9191      1112
-   macro avg     0.9194    0.9191    0.9190      1112
-weighted avg     0.9194    0.9191    0.9190      1112
+    accuracy                         0.8805       586
+   macro avg     0.8810    0.8805    0.8805       586
+weighted avg     0.8810    0.8805    0.8805       586
 
 
 ==================================================================================================================================
