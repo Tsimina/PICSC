@@ -43,24 +43,25 @@ Best XGBoost params (clean):
 Running 5-fold StratifiedGroupKFold with tuned params (OOF predictions)...
 
 === 5-FOLD GROUPED CV (OOF) RESULTS ===
-Fold 1: AUC=0.807 | Acc=0.917 | P=0.940 | R/Sens=0.971 | Spec=0.321 | F1=0.955 (Pos=309, Neg=28)
-Fold 2: AUC=0.958 | Acc=0.847 | P=0.746 | R/Sens=0.934 | Spec=0.790 | F1=0.829 (Pos=91, Neg=138)
-Fold 3: AUC=nan | Acc=0.987 | P=0.000 | R/Sens=0.000 | Spec=0.987 | F1=0.000 (Pos=0, Neg=237)
-Fold 4: AUC=nan | Acc=0.974 | P=0.000 | R/Sens=0.000 | Spec=0.974 | F1=0.000 (Pos=0, Neg=343)
-Fold 5: AUC=0.954 | Acc=0.912 | P=0.949 | R/Sens=0.941 | Spec=0.793 | F1=0.945 (Pos=457, Neg=111)
+Fold 1: AUC=0.833 | Acc=0.698 | P=0.920 | R/Sens=0.691 | Spec=0.732 | F1=0.789 (Pos=317, Neg=71)
+Fold 2: AUC=0.943 | Acc=0.873 | P=0.854 | R/Sens=0.732 | Spec=0.940 | F1=0.788 (Pos=231, Neg=486)
+Fold 3: AUC=nan | Acc=0.688 | P=0.000 | R/Sens=0.000 | Spec=0.688 | F1=0.000 (Pos=0, Neg=16)
+Fold 4: AUC=nan | Acc=0.000 | P=0.000 | R/Sens=0.000 | Spec=0.000 | F1=0.000 (Pos=0, Neg=1)
+Fold 5: AUC=0.951 | Acc=0.833 | P=0.777 | R/Sens=0.952 | Spec=0.704 | F1=0.856 (Pos=330, Neg=304)
 
 OVERALL OOF METRICS (grouped by PCAP/source):
-AUC=0.9759 | Accuracy=0.9271 | Precision=0.9076 | Recall/Sens=0.9510 | Specificity=0.9032 | F1=0.9288
+AUC=0.9228 | Accuracy=0.8178 | Precision=0.8298 | Recall/Sens=0.7995 | Specificity=0.8360 | F1=0.8144
 
 Classification report (OOF):
               precision    recall  f1-score   support
 
-        Rest     0.9485    0.9032    0.9253       857
-     Spotify     0.9076    0.9510    0.9288       857
+        Rest     0.8066    0.8360    0.8210       878
+     Spotify     0.8298    0.7995    0.8144       878
 
-    accuracy                         0.9271      1714
-   macro avg     0.9281    0.9271    0.9270      1714
-weighted avg     0.9281    0.9271    0.9270      1714
+    accuracy                         0.8178      1756
+   macro avg     0.8182    0.8178    0.8177      1756
+weighted avg     0.8182    0.8178    0.8177      1756
+
 
 60s flow activ timeout 600s
 
@@ -120,52 +121,52 @@ Only Streaming data - Netflix, Spotify, Youtube, Vimeo
 15s active flow,  idle timeout 600s
 
 === GRID SEARCH SUMMARY ===
-Best mean CV AUC: 0.8273
+Best mean CV AUC: 0.7748
 Best params:
-  model__colsample_bytree: 0.6
+  model__colsample_bytree: 0.8
   model__learning_rate: 0.05
   model__max_depth: 4
   model__n_estimators: 400
-  model__subsample: 0.6
+  model__subsample: 0.8
 
 Top 5 parameter sets by mean AUC:
  mean_test_score  std_test_score  param_model__max_depth  param_model__learning_rate  param_model__n_estimators  param_model__subsample  param_model__colsample_bytree
-        0.827346        0.048353                       4                        0.05                        400                     0.6                            0.6
-        0.826472        0.046998                       6                        0.05                        400                     0.6                            0.6
-        0.824886        0.045775                       4                        0.05                        400                     0.6                            0.8
-        0.824695        0.049071                       8                        0.05                        400                     0.6                            0.6
-        0.824624        0.049392                       4                        0.05                        400                     0.8                            0.6
+        0.774788        0.058183                       4                        0.05                        400                     0.8                            0.8
+        0.773852        0.055969                       4                        0.05                        400                     0.8                            0.6
+        0.772510        0.056762                       4                        0.05                        400                     0.8                            1.0
+        0.772470        0.053805                       4                        0.05                        400                     0.6                            0.6
+        0.772238        0.062020                       4                        0.05                        400                     1.0                            0.6
 
 Best XGBoost params (clean):
   n_estimators: 400
   learning_rate: 0.05
   max_depth: 4
-  subsample: 0.6
-  colsample_bytree: 0.6
+  subsample: 0.8
+  colsample_bytree: 0.8
   min_child_weight: 1.0
   reg_lambda: 1.0
 
 Running 5-fold StratifiedGroupKFold with tuned params (OOF predictions)...
 
 === 5-FOLD GROUPED CV (OOF) RESULTS ===
-Fold 1: AUC=0.803 | Acc=0.584 | P=0.439 | R/Sens=0.806 | Spec=0.470 | F1=0.569 (Pos=139, Neg=270)
-Fold 2: AUC=nan | Acc=0.667 | P=0.000 | R/Sens=0.000 | Spec=0.667 | F1=0.000 (Pos=0, Neg=171)
-Fold 3: AUC=0.812 | Acc=0.775 | P=0.930 | R/Sens=0.801 | Spec=0.597 | F1=0.861 (Pos=413, Neg=62)
-Fold 4: AUC=nan | Acc=0.648 | P=0.000 | R/Sens=0.000 | Spec=0.648 | F1=0.000 (Pos=0, Neg=290)
-Fold 5: AUC=0.768 | Acc=0.603 | P=0.888 | R/Sens=0.557 | Spec=0.760 | F1=0.685 (Pos=341, Neg=100)
+Fold 1: AUC=nan | Acc=0.561 | P=0.000 | R/Sens=0.000 | Spec=0.561 | F1=0.000 (Pos=0, Neg=244)
+Fold 2: AUC=nan | Acc=0.711 | P=0.000 | R/Sens=0.000 | Spec=0.711 | F1=0.000 (Pos=0, Neg=197)
+Fold 3: AUC=nan | Acc=0.620 | P=0.000 | R/Sens=0.000 | Spec=0.620 | F1=0.000 (Pos=0, Neg=179)
+Fold 4: AUC=0.797 | Acc=0.590 | P=0.918 | R/Sens=0.503 | Spec=0.860 | F1=0.650 (Pos=467, Neg=150)
+Fold 5: AUC=0.812 | Acc=0.750 | P=0.914 | R/Sens=0.754 | Spec=0.731 | F1=0.827 (Pos=411, Neg=108)
 
 OVERALL OOF METRICS (grouped by PCAP/source):
-AUC=0.7611 | Accuracy=0.6579 | Precision=0.6433 | Recall/Sens=0.7088 | Specificity=0.6069 | F1=0.6745
+AUC=0.7143 | Accuracy=0.6498 | Precision=0.6590 | Recall/Sens=0.6207 | Specificity=0.6788 | F1=0.6393
 
 Classification report (OOF):
               precision    recall  f1-score   support
 
-        Rest     0.6758    0.6069    0.6395       893
-     Spotify     0.6433    0.7088    0.6745       893
+        Rest     0.6416    0.6788    0.6597       878
+     Spotify     0.6590    0.6207    0.6393       878
 
-    accuracy                         0.6579      1786
-   macro avg     0.6596    0.6579    0.6570      1786
-weighted avg     0.6596    0.6579    0.6570      1786
+    accuracy                         0.6498      1756
+   macro avg     0.6503    0.6498    0.6495      1756
+weighted avg     0.6503    0.6498    0.6495      1756
 
 
 60s active flow,  idle timeout 600s
@@ -199,21 +200,21 @@ Best XGBoost params (clean):
 Running 5-fold StratifiedGroupKFold with tuned params (OOF predictions)...
 
 === 5-FOLD GROUPED CV (OOF) RESULTS ===
-Fold 1: AUC=0.801 | Acc=0.722 | P=0.494 | R/Sens=0.772 | Spec=0.704 | F1=0.603 (Pos=57, Neg=152)
-Fold 2: AUC=nan | Acc=0.748 | P=0.000 | R/Sens=0.000 | Spec=0.748 | F1=0.000 (Pos=0, Neg=119)
-Fold 3: AUC=0.838 | Acc=0.766 | P=0.887 | R/Sens=0.797 | Spec=0.661 | F1=0.840 (Pos=207, Neg=62)
-Fold 4: AUC=0.742 | Acc=0.662 | P=0.549 | R/Sens=0.859 | Spec=0.531 | F1=0.670 (Pos=85, Neg=128)
-Fold 5: AUC=0.760 | Acc=0.619 | P=0.843 | R/Sens=0.546 | Spec=0.779 | F1=0.663 (Pos=207, Neg=95)
+Fold 1: AUC=0.804 | Acc=0.723 | P=0.744 | R/Sens=0.784 | Spec=0.643 | F1=0.763 (Pos=74, Neg=56)
+Fold 2: AUC=0.749 | Acc=0.646 | P=0.848 | R/Sens=0.604 | Spec=0.745 | F1=0.705 (Pos=111, Neg=47)
+Fold 3: AUC=0.750 | Acc=0.662 | P=0.944 | R/Sens=0.630 | Spec=0.818 | F1=0.756 (Pos=108, Neg=22)
+Fold 4: AUC=nan | Acc=0.667 | P=0.000 | R/Sens=0.000 | Spec=0.667 | F1=0.000 (Pos=0, Neg=102)
+Fold 5: AUC=nan | Acc=0.621 | P=0.000 | R/Sens=0.000 | Spec=0.621 | F1=0.000 (Pos=0, Neg=66)
 
 OVERALL OOF METRICS (grouped by PCAP/source):
-AUC=0.7646 | Accuracy=0.6960 | Precision=0.6906 | Recall/Sens=0.7104 | Specificity=0.6817 | F1=0.7004
+AUC=0.7085 | Accuracy=0.6672 | Precision=0.6701 | Recall/Sens=0.6587 | Specificity=0.6758 | F1=0.6644
 
 Classification report (OOF):
               precision    recall  f1-score   support
 
-        Rest     0.7019    0.6817    0.6916       556
-     Spotify     0.6906    0.7104    0.7004       556
+        Rest     0.6644    0.6758    0.6701       293
+     Spotify     0.6701    0.6587    0.6644       293
 
-    accuracy                         0.6960      1112
-   macro avg     0.6962    0.6960    0.6960      1112
-weighted avg     0.6962    0.6960    0.6960      1112
+    accuracy                         0.6672       586
+   macro avg     0.6673    0.6672    0.6672       586
+weighted avg     0.6673    0.6672    0.6672       586

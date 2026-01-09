@@ -1,0 +1,129 @@
+[SUMMARY]
+  Spotify rows     : 857
+  Non-Spotify rows : 857
+  Total rows       : 1714
+
+[SUMMARY]-60s
+  Spotify rows     : 556
+  Non-Spotify rows : 556
+  Total rows       : 1112
+
+==================================================================================================================================
+
+All database 
+
+15s flow activ timeout 600s
+
+=== Best Model Summary ===
+Best Hyperparameters: Estimators=5, Min Samples Split=5, Max Depth=6, Min Samples Leaf=3, Max Samples=0.9, Max Features=sqrt
+Best Validation Accuracy: 85.99%
+
+Best Configuration Details:
+SIM: 174
+Estimators: 5
+Min Samples Split: 5
+Max Depth: 6
+Min Samples Leaf: 3
+Max Samples: 0.9
+Max Features: sqrt
+Train Acc: 86.59%, Val Acc: 85.99%
+Train F1: 87.01%, Val F1: 86.60%
+
+Classification Report:
+              precision    recall  f1-score   support
+
+        Rest       1.00      0.74      0.85       878
+     Spotify       0.79      1.00      0.88       878
+
+    accuracy                           0.87      1756
+   macro avg       0.89      0.87      0.87      1756
+weighted avg       0.89      0.87      0.87      1756
+
+60s flow activ timeout 600s
+
+=== Best Model Summary ===
+Best Hyperparameters: Estimators=5, Min Samples Split=2, Max Depth=11, Min Samples Leaf=3, Max Samples=0.9, Max Features=sqrt
+Best Validation Accuracy: 89.59%
+
+Best Configuration Details:
+SIM: 54
+Estimators: 5
+Min Samples Split: 2
+Max Depth: 11
+Min Samples Leaf: 3
+Max Samples: 0.9
+Max Features: sqrt
+Train Acc: 91.04%, Val Acc: 89.59%
+Train F1: 91.75%, Val F1: 90.58%
+
+Classification Report:
+              precision    recall  f1-score   support
+
+        Rest       1.00      0.81      0.89       293
+     Spotify       0.84      1.00      0.91       293
+
+    accuracy                           0.90       586
+   macro avg       0.92      0.90      0.90       586
+weighted avg       0.92      0.90      0.90       586
+
+
+==================================================================================================================================
+
+
+==================================================================================================================================
+
+Only Streaming data - Netflix, Spotify, Youtube, Vimeo
+
+15s active flow,  idle timeout 600s
+
+=== Best Model Summary ===
+Best Hyperparameters: Estimators=45, Min Samples Split=5, Max Depth=9, Min Samples Leaf=1, Max Samples=0.9, Max Features=log2
+Best Validation Accuracy: 79.68%
+
+Best Configuration Details:
+SIM: 2115
+Estimators: 45
+Min Samples Split: 5
+Max Depth: 9
+Min Samples Leaf: 1
+Max Samples: 0.9
+Max Features: log2
+Train Acc: 85.50%, Val Acc: 79.68%
+Train F1: 87.90%, Val F1: 78.26%
+
+Classification Report:
+              precision    recall  f1-score   support
+
+        Rest       0.88      0.84      0.86       878
+     Spotify       0.85      0.89      0.87       878
+
+    accuracy                           0.86      1756
+   macro avg       0.86      0.86      0.86      1756
+weighted avg       0.86      0.86      0.86      1756
+
+60s active flow,  idle timeout 600s
+
+=== Best Model Summary ===
+Best Hyperparameters: Estimators=50, Min Samples Split=2, Max Depth=12, Min Samples Leaf=1, Max Samples=0.7, Max Features=log2
+Best Validation Accuracy: 76.27%
+
+Best Configuration Details:
+SIM: 2217
+Estimators: 50
+Min Samples Split: 2
+Max Depth: 12
+Min Samples Leaf: 1
+Max Samples: 0.7
+Max Features: log2
+Train Acc: 85.98%, Val Acc: 76.27%
+Train F1: 94.00%, Val F1: 76.10%
+
+Classification Report:
+              precision    recall  f1-score   support
+
+        Rest       0.93      0.92      0.92       293
+     Spotify       0.92      0.93      0.93       293
+
+    accuracy                           0.92       586
+   macro avg       0.92      0.92      0.92       586
+weighted avg       0.92      0.92      0.92       586

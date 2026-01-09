@@ -18,7 +18,7 @@ from xgboost import XGBClassifier
 warnings.filterwarnings("ignore")
 
 # Configuration
-FILEPATH = '../extracted_features/dataset.csv'
+FILEPATH = '../extracted_features/dataset_flow60_arff.csv'
 RANDOM_STATE = 42
 
 # Function to pick group column

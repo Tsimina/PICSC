@@ -73,7 +73,7 @@ weighted avg       0.98      0.98      0.98      1112
 
 ==================================================================================================================================
 
-Only Streaming data - Ntflix, Spotify, Youtube, Vimeo
+Only Streaming data - Netflix, Spotify, Youtube, Vimeo
 
 15s active flow,  idle timeout 600s
 
