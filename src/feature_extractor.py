@@ -27,7 +27,7 @@ def calculate_statistical_features(flow: CompleteFlow, label: int) -> ExtractedF
         duration = 0.0
         iat_sequence = np.array([], dtype=float)
 
-    # --- Directional split (A->B = forward; B->A = backward) ---
+    # Directional split (A->B = forward; B->A = backward)
     fwd_ts = []
     bwd_ts = []
     bytes_ab = 0
@@ -67,11 +67,11 @@ def calculate_statistical_features(flow: CompleteFlow, label: int) -> ExtractedF
     else:
         biat_seq = np.array([], dtype=float)
 
-    # --- Packet length stats (extras) ---
+    # Packet length stats
     mean_pkt_len = float(np.mean(pkt_lengths)) if pkt_lengths.size > 0 else 0.0
     skewness_pkt_len = float(skew(pkt_lengths)) if pkt_lengths.size >= 3 else 0.0
 
-    # --- Flow IAT stats (ARFF expects min/max/mean/std) ---
+    # Flow IAT stats (ARFF expects min/max/mean/std)
     min_flowiat = float(np.min(iat_sequence)) if iat_sequence.size > 0 else 0.0
     max_flowiat = float(np.max(iat_sequence)) if iat_sequence.size > 0 else 0.0
     mean_flowiat = float(np.mean(iat_sequence)) if iat_sequence.size > 0 else 0.0
@@ -81,7 +81,7 @@ def calculate_statistical_features(flow: CompleteFlow, label: int) -> ExtractedF
     std_iat = std_flowiat
     kurtosis_iat = float(kurtosis(iat_sequence, fisher=True)) if iat_sequence.size >= 4 else 0.0
 
-    # --- Forward/backward IAT stats (ARFF expects total/min/max/mean) ---
+    # Forward/backward IAT stats (ARFF expects total/min/max/mean)
     total_fiat = float(np.sum(fiat_seq)) if fiat_seq.size > 0 else 0.0
     min_fiat = float(np.min(fiat_seq)) if fiat_seq.size > 0 else 0.0
     max_fiat = float(np.max(fiat_seq)) if fiat_seq.size > 0 else 0.0
@@ -92,11 +92,11 @@ def calculate_statistical_features(flow: CompleteFlow, label: int) -> ExtractedF
     max_biat = float(np.max(biat_seq)) if biat_seq.size > 0 else 0.0
     mean_biat = float(np.mean(biat_seq)) if biat_seq.size > 0 else 0.0
 
-    # --- Rates (ARFF expects pkts/s and bytes/s) ---
+    # Rates (ARFF expects pkts/s and bytes/s)
     flowPktsPerSecond = float(total_packets / duration) if duration > 0 else 0.0
     flowBytesPerSecond = float(total_bytes / duration) if duration > 0 else 0.0
 
-    # --- Active / Idle stats (ARFF expects min/mean/max/std) ---
+    # Active / Idle stats (ARFF expects min/mean/max/std)
     # Common CICFlowMeter-style threshold (seconds)
     ACTIVE_IDLE_THRESH = 2.0
 
@@ -129,20 +129,14 @@ def calculate_statistical_features(flow: CompleteFlow, label: int) -> ExtractedF
     max_idle = float(np.max(idle_arr)) if idle_arr.size > 0 else 0.0
     std_idle = float(np.std(idle_arr)) if idle_arr.size > 0 else 0.0
 
-    # --- Stable Flow ID ---
+    # Stable Flow ID
     flow_id_string = "_".join(flow['flow_key'])
     flow_id_hash = int(hashlib.sha1(flow_id_string.encode('utf-8')).hexdigest(), 16) % (10**16)
 
     features: ExtractedFeatures = {
-        # =========================
-        # REQUIRED / IDENTIFIERS
-        # =========================
         'Flow_ID': int(flow_id_hash),
 
-        # =========================
-        # ORIGINAL FEATURES (yours)
-        # Comment out any line you don't want in the output CSV.
-        # =========================
+        # Original features (comment out if not needed)
         # 'Duration_s': float(duration),
         # 'Total_Packets': int(total_packets),
         # 'Bytes_AB': int(bytes_ab),
@@ -152,50 +146,32 @@ def calculate_statistical_features(flow: CompleteFlow, label: int) -> ExtractedF
         # 'Kurtosis_IAT': float(kurtosis_iat),
         # 'Skewness_Pkt_Len': float(skewness_pkt_len),
         # 'Direction_Ratio': float(direction_ratio),
-
-        # Label (keep at least one of these)
         # 'Label': int(label),
-        # 'class1': str(label),  # optional: swap to string labels if you map them elsewhere
 
-        # =========================
-        # ARFF-ALIGNED FEATURES
-        # Comment out any you don't need.
-        # =========================
+        # Arff features
         'duration': float(duration),
-
-        # ---- Forward IAT (fiat) ----
         'total_fiat': float(total_fiat),
         'min_fiat': float(min_fiat),
         'mean_fiat': float(mean_fiat),
         'max_fiat': float(max_fiat),
-
-        # ---- Backward IAT (biat) ----
         'total_biat': float(total_biat),
         'min_biat': float(min_biat),
         'mean_biat': float(mean_biat),
         'max_biat': float(max_biat),
-
-        # ---- Flow rates ----
         'flowPktsPerSecond': float(flowPktsPerSecond),
         'flowBytesPerSecond': float(flowBytesPerSecond),
-
-        # ---- Flow IAT (flowiat) ----
         'min_flowiat': float(min_flowiat),
         'mean_flowiat': float(mean_flowiat),
         'max_flowiat': float(max_flowiat),
         'std_flowiat': float(std_flowiat),
-
-        # ---- Active / Idle ----
         'min_active': float(min_active),
         'mean_active': float(mean_active),
         'max_active': float(max_active),
         'std_active': float(std_active),
-
         'min_idle': float(min_idle),
         'mean_idle': float(mean_idle),
         'max_idle': float(max_idle),
         'std_idle': float(std_idle),
-
         'Label': int(label),
     }
 
