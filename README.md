@@ -195,7 +195,7 @@ Experiments are conducted using both 15s and 60s windows to analyze the impact o
 
 ### Extracted Features
 
-For each flow, the following statistical and temporal features are computed and stored in CSV format:
+For each flow, the following features are computed and stored in **CSV format**:
 
 - Flow ID (hash-based identifier)
 - Flow duration
@@ -209,7 +209,24 @@ For each flow, the following statistical and temporal features are computed and 
 - Packet length skewness
 - Direction ratio (proportion of packets sent by the initiator)
 
-Each flow window is treated as an independent sample in the dataset.
+These features capture **traffic volume, temporal dynamics, and directional behavior**
+without relying on packet payloads.
+
+### ARFF Features (Author-Provided Features)
+
+For the **ARFF Features scenario**, the project uses **pre-extracted flow-level features**
+provided directly by the dataset authors.
+
+These features are stored in **ARFF format** and follow standardized methodologies
+commonly used in the literature for encrypted traffic classification.
+
+Characteristics of the ARFF features:
+
+- Computed at flow level by the dataset authors
+- Include statistical descriptors of packet sizes and timing
+- Capture directional traffic behavior
+- Do not require reprocessing raw PCAP files
+- Feature set is fixed and not customizable
 
 ## Model details
 
