@@ -79,7 +79,7 @@ Only Streaming data - Netflix, Spotify, Youtube, Vimeo
 
 === Best Model Summary ===
 Best Hyperparameters: Estimators=35, Min Samples Split=5, Max Depth=14, Min Samples Leaf=3, Max Samples=0.9, Max Features=log2
-Best Validation Accuracy: 81.52%
+Best Validation Accuracy: 82.52%
 
 Best Configuration Details:
 SIM: 1679
@@ -89,7 +89,7 @@ Max Depth: 14
 Min Samples Leaf: 3
 Max Samples: 0.9
 Max Features: log2
-Train Acc: 88.31%, Val Acc: 81.52%
+Train Acc: 88.31%, Val Acc: 82.52%
 Train F1: 88.97%, Val F1: 82.54%
 Best model saved to ../results\best_rf_model_300.pth
 
@@ -107,7 +107,7 @@ weighted avg       0.89      0.88      0.88      1786
 
 === Best Model Summary ===
 Best Hyperparameters: Estimators=25, Min Samples Split=3, Max Depth=13, Min Samples Leaf=1, Max Samples=0.9, Max Features=sqrt
-Best Validation Accuracy: 81.30%
+Best Validation Accuracy: 87.30%
 
 Best Configuration Details:
 SIM: 1106
@@ -117,8 +117,8 @@ Max Depth: 13
 Min Samples Leaf: 1
 Max Samples: 0.9
 Max Features: sqrt
-Train Acc: 94.83%, Val Acc: 81.30%
-Train F1: 95.03%, Val F1: 81.76%
+Train Acc: 94.83%, Val Acc: 87.30%
+Train F1: 94.03%, Val F1: 89.76%
 Best model saved to ../results\best_rf_model_300.pth
 
 Classification Report:

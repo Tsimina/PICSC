@@ -78,7 +78,7 @@ Only Streaming data - Netflix, Spotify, Youtube, Vimeo
 
 === Best Model Summary ===
 Best Hyperparameters: Estimators=45, Min Samples Split=5, Max Depth=9, Min Samples Leaf=1, Max Samples=0.9, Max Features=log2
-Best Validation Accuracy: 79.68%
+Best Validation Accuracy: 77.68%
 
 Best Configuration Details:
 SIM: 2115
@@ -88,7 +88,7 @@ Max Depth: 9
 Min Samples Leaf: 1
 Max Samples: 0.9
 Max Features: log2
-Train Acc: 85.50%, Val Acc: 79.68%
+Train Acc: 83.50%, Val Acc: 77.68%
 Train F1: 87.90%, Val F1: 78.26%
 
 Classification Report:
@@ -105,7 +105,7 @@ weighted avg       0.86      0.86      0.86      1756
 
 === Best Model Summary ===
 Best Hyperparameters: Estimators=50, Min Samples Split=2, Max Depth=12, Min Samples Leaf=1, Max Samples=0.7, Max Features=log2
-Best Validation Accuracy: 76.27%
+Best Validation Accuracy: 78.27%
 
 Best Configuration Details:
 SIM: 2217
@@ -115,8 +115,8 @@ Max Depth: 12
 Min Samples Leaf: 1
 Max Samples: 0.7
 Max Features: log2
-Train Acc: 85.98%, Val Acc: 76.27%
-Train F1: 94.00%, Val F1: 76.10%
+Train Acc: 85.98%, Val Acc: 78.27%
+Train F1: 88.00%, Val F1: 83.10%
 
 Classification Report:
               precision    recall  f1-score   support

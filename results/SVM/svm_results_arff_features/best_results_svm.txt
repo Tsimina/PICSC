@@ -70,14 +70,14 @@ Only Streaming data - Netflix, Spotify, Youtube, Vimeo
 
 === Best Model Summary ===
 Best Hyperparameters: PCA=15, Kernel=rbf, C=1
-Best Validation Accuracy: 57.75%
+Best Validation Accuracy: 60.75%
 
 Best Configuration Details:
 SIM: 364
 PCA Components: 15
 Kernel: rbf
 C: 1
-Train Acc: 58.97%, Val Acc: 57.75%
+Train Acc: 61.97%, Val Acc: 60.75%
 Train F1: 68.52%, Val F1: 67.65%
 
 Classification Report:
@@ -94,14 +94,14 @@ weighted avg       0.64      0.59      0.55      1756
 
 === Best Model Summary ===
 Best Hyperparameters: PCA=15, Kernel=rbf, C=1
-Best Validation Accuracy: 57.75%
+Best Validation Accuracy: 63.75%
 
 Best Configuration Details:
 SIM: 364
 PCA Components: 15
 Kernel: rbf
 C: 1
-Train Acc: 58.97%, Val Acc: 57.75%
+Train Acc: 65.97%, Val Acc: 63.75%
 Train F1: 68.52%, Val F1: 67.65%
 
 Classification Report:
