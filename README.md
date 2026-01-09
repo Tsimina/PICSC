@@ -299,124 +299,53 @@ Two experimental scenarios are evaluated:
 
 Unless explicitly stated otherwise, the results below refer to the **Base Features scenario**.
 
-## Support Vector Machine (SVM)
+## Model Comparison 
 
-### All Applications (Base Features)
-
-#### 15s Flow Window (Idle Timeout = 600s)
-
-| Metric    | Value |
-|-----------|-------|
-| Accuracy  | 82.44% |
-| Precision | 0.87 |
-| Recall    | 0.77 |
-| F1-score  | 0.81 |
-
-**Best configuration:**  
-- Kernel: Linear  
-- PCA components: 28  
-- C: 1  
-
-#### 60s Flow Window (Idle Timeout = 600s)
-
-| Metric    | Value |
-|-----------|-------|
-| Accuracy  | 86.24% |
-| Precision | 0.86 |
-| Recall    | 0.87 |
-| F1-score  | 0.87 |
-
-**Best configuration:**  
-- Kernel: RBF  
-- PCA components: 28  
-- C: 1  
-
-## Random Forest (RF)
-
-### All Applications (Base Features)
-
-#### 15s Flow Window (Idle Timeout = 600s)
-
-| Metric    | Value |
-|-----------|-------|
-| Accuracy  | 94.87% |
-| Precision | 0.96 |
-| Recall    | 1.00 |
-| F1-score  | 0.98 |
-
-**Best configuration:**  
-- Estimators: 30  
-- Max depth: 8  
-- Min samples split: 5  
-- Max features: log2  
-
-#### 60s Flow Window (Idle Timeout = 600s)
-
-| Metric    | Value |
-|-----------|-------|
-| Accuracy  | **95.68%** |
-| Precision | **0.97** |
-| Recall    | **1.00** |
-| F1-score  | **0.98** |
-
-**Best configuration:**  
-- Estimators: 15  
-- Max depth: 8  
-- Min samples split: 2  
-- Max features: sqrt  
-
-## XGBoost
-
-### All Applications (Base Features)
-
-#### 15s Flow Window (Idle Timeout = 600s)
-
-| Metric    | Value |
-|-----------|-------|
-| Accuracy  | 92.71% |
-| Precision | 0.91 |
-| Recall    | 0.95 |
-| F1-score  | 0.93 |
-| AUC       | 0.976 |
-
-#### 60s Flow Window (Idle Timeout = 600s)
-
-| Metric    | Value |
-|-----------|-------|
-| Accuracy  | 91.91% |
-| Precision | 0.91 |
-| Recall    | 0.93 |
-| F1-score  | 0.92 |
-| AUC       | 0.958 |
-
-## Model Comparison – Base Features (All Applications)
-
-### 15s Flow Window
-
-| Model | Accuracy | Precision | Recall | F1-score |
-|------|----------|-----------|--------|----------|
-| SVM  | 82.44% | 0.87 | 0.77 | 0.81 |
-| RF   | **94.87%** | **0.96** | **1.00** | **0.98** |
-| XGB  | 92.71% | 0.91 | 0.95 | 0.93 |
-
-### 60s Flow Window
-
-| Model | Accuracy | Precision | Recall | F1-score |
-|------|----------|-----------|--------|----------|
-| SVM  | 86.24% | 0.86 | 0.87 | 0.87 |
-| RF   | **95.68%** | **0.97** | **1.00** | **0.98** |
-| XGB  | 91.91% | 0.91 | 0.93 | 0.92 |
-
-## ARFF Feature Results (Author-Provided Features)
-
-### Best Results – All Applications
+### Base Features 
 
 | Model | Flow Window | Accuracy | Precision | Recall | F1-score |
 |------|-------------|----------|-----------|--------|----------|
-| SVM  | 15s | 84.46% | 0.76 | 1.00 | 0.87 |
+| SVM  | 15s | 82.44% | 0.87 | 0.77 | 0.81 |
+| SVM  | 60s | 86.24% | 0.86 | 0.87 | 0.87 |
+| RF   | 15s | 94.87% | 0.96 | 1.00 | 0.98 |
+| RF   | 60s | **95.68%** | **0.97** | **1.00** | **0.98** |
+| XGB  | 15s | 92.71% | 0.91 | 0.95 | 0.93 |
+| XGB  | 60s | 91.91% | 0.91 | 0.93 | 0.92 |
+
+### Streaming-Only  
+*(Netflix, YouTube, Vimeo, Spotify)*
+
+| Model | Flow Window | Accuracy | Precision | Recall | F1-score |
+|------|-------------|----------|-----------|--------|----------|
+| SVM  | 15s | 62.60% | 0.84 | 0.31 | 0.46 |
+| SVM  | 60s | 67.62% | 0.70 | 0.70 | 0.70 |
+| RF   | 15s | 81.52% | 0.83 | 0.95 | 0.89 |
+| RF   | 60s | **81.30%** | **0.91** | **0.99** | **0.95** |
+| XGB  | 15s | 65.79% | 0.64 | 0.71 | 0.67 |
+| XGB  | 60s | 69.60% | 0.69 | 0.71 | 0.70 |
+
+## ARFF Feature Results (ARFF matched features extracted)
+
+### Base Features
+
+| Model | Flow Window | Accuracy | Precision | Recall | F1-score |
+|------|-------------|----------|-----------|--------|----------|
+| SVM  | 15s | 84.46% | 0.88 | 0.84 | 0.84 |
 | SVM  | 60s | 86.86% | 0.83 | 0.95 | 0.89 |
 | RF   | 15s | 85.99% | 0.79 | 1.00 | 0.88 |
 | RF   | 60s | **89.59%** | **0.84** | **1.00** | **0.91** |
+| XGB  | 15s | 92.71% | 0.94 | 0.95 | 0.94 |
+| XGB  | 60s | 91.91% | 0.90 | 0.93 | 0.90 |
+
+### Streaming-Only  
+*(Netflix, YouTube, Vimeo, Spotify)*
+
+| Model | Flow Window | Accuracy | Precision | Recall | F1-score |
+|------|-------------|----------|-----------|--------|----------|
+| SVM  | 15s | 60.75% | 0.64 | 0.88 | 0.68 |
+| SVM  | 60s | 63.75% | 0.64 | 0.88 | 0.68 |
+| RF   | 15s | 77.68% | 0.85 | 0.89 | 0.87 |
+| RF   | 60s | **78.27%** | **0.85** | **0.93** | **0.93** |
 | XGB  | 15s | 64.98% | 0.66 | 0.62 | 0.64 |
 | XGB  | 60s | 66.72% | 0.67 | 0.66 | 0.66 |
 
