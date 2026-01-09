@@ -284,7 +284,6 @@ def main():
         title="XGBoost Grouped CV Confusion Matrix (OOF)",
         out_path=cm_path,
     )
-    print(f"\nConfusion matrix saved to: {cm_path}")
 
     # ROC plot only when both classes are present
     if len(np.unique(y)) == 2:
@@ -332,32 +331,6 @@ def main():
     plt.show()
 
     try:
-        cv_results_out = os.path.join(results_dir, "xgb_grid_search_cv_results.csv")
-        cv_results.to_csv(cv_results_out, index=False)
-
-        folds_out = os.path.join(results_dir, "xgb_groupcv_folds.csv")
-        pd.DataFrame(fold_rows).to_csv(folds_out, index=False)
-
-        overall_out = os.path.join(results_dir, "xgb_groupcv_overall.csv")
-        overall_record = {
-            "AUC": overall["AUC"],
-            "Accuracy": overall["Accuracy"],
-            "Precision": overall["Precision"],
-            "Recall": overall["Recall"],
-            "F1": overall["F1"],
-            "Sensitivity": overall_sens,
-            "Specificity": overall_spec,
-            "Pos(total)": int((y == 1).sum()),
-            "Neg(total)": int((y == 0).sum()),
-        }
-        pd.DataFrame([overall_record]).to_csv(overall_out, index=False)
-
-        imp_out = os.path.join(results_dir, "xgb_feature_importances.csv")
-        imp_df.to_csv(imp_out, index=False)
-
-        cm_out = os.path.join(results_dir, "xgb_confusion_matrix.csv")
-        pd.DataFrame(cm_all, index=["Rest", "Spotify"], columns=["Rest", "Spotify"]).to_csv(cm_out)
-
         oof_out = os.path.join(results_dir, "XGB_oof_predictions.csv")
         pd.DataFrame({
             group_col: groups,
@@ -366,18 +339,10 @@ def main():
             "proba": oof_proba
         }).to_csv(oof_out, index=False)
 
-        print("\nSaved CSVs:")
-        print(f" - Grid search results: {cv_results_out}")
-        print(f" - Fold results: {folds_out}")
-        print(f" - Overall metrics: {overall_out}")
-        print(f" - Feature importances: {imp_out}")
-        print(f" - Confusion matrix (OOF): {cm_out}")
+        print("\nSaved CSV:")
         print(f" - OOF predictions: {oof_out}")
         if roc_path:
             print(f" - ROC plot: {roc_path}")
-    except Exception as e:
-        print(f"Failed saving CSVs: {e}")
-
 
 if __name__ == "__main__":
     main()
