@@ -320,6 +320,8 @@ Unless explicitly stated otherwise, the results below refer to the **Base Featur
 
 ### Base Features 
 
+### Combined Traffic
+
 | Model | Flow Window | Accuracy | Precision | Recall | F1-score |
 |------|-------------|----------|-----------|--------|----------|
 | SVM  | 15s | 82.44% | 0.87 | 0.77 | 0.81 |
@@ -343,7 +345,7 @@ Unless explicitly stated otherwise, the results below refer to the **Base Featur
 
 ## ARFF Feature Results (ARFF matched features extracted)
 
-### Base Features
+### Combined Traffic
 
 | Model | Flow Window | Accuracy | Precision | Recall | F1-score |
 |------|-------------|----------|-----------|--------|----------|
@@ -366,12 +368,19 @@ Unless explicitly stated otherwise, the results below refer to the **Base Featur
 | XGB  | 15s | 64.98% | 0.66 | 0.62 | 0.64 |
 | XGB  | 60s | 66.72% | 0.67 | 0.66 | 0.66 |
 
-## Base Features vs. ARFF Features – Best Configuration
+## Base Features vs. ARFF Features – Best Configuration (Combined Traffic)
 
 | Feature Scenario | Best Model | Flow Window | Accuracy |
 |------------------|------------|-------------|----------|
 | Base Features | Random Forest | 60s | **95.68%** |
 | ARFF Features | Random Forest | 60s | 89.59% |
+
+## Base Features vs. ARFF Features – Best Configuration (Streaming Only)
+
+| Feature Scenario | Best Model | Flow Window | Accuracy |
+|------------------|------------|-------------|----------|
+| Base Features | Random Forest | 60s | 81.30% |
+| ARFF Features | Random Forest | 60s | 78.27% |
 
 ## Performance Interpretation: All Data vs. Streaming-Only Data
 
@@ -392,7 +401,7 @@ When restricting the dataset to **streaming applications only**
 - Traffic patterns are more similar, reducing class separability
 - Accuracy typically falls in the **60–80% range**
 
-This confirms that **Spotify traffic is most distinguishable when contrasted against a diverse set of applications**, rather than against other streaming services.
+**Spotify traffic is most distinguishable against a diverse set of applications**, rather than against other streaming services.
 
 ## Summary
 
@@ -401,13 +410,12 @@ This confirms that **Spotify traffic is most distinguishable when contrasted aga
 | All applications | Base Features | **Best performance (~96%)** |
 | All applications | ARFF Features | Good baseline (~90%) |
 | Streaming-only | Any features | Lower performance |
-
-**Final takeaway:**  
+ 
 > Custom flow-based feature engineering provides a significant performance advantage over standardized ARFF features.
 
 ## Limitations
 
-- Only classical machine learning models were evaluated
+- Only classical ML models were evaluated
 - Deep learning approaches (e.g., CNNs, GNNs) were not implemented
 - The classification task is limited to binary classification (Spotify vs. rest)
 
