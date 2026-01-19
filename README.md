@@ -163,11 +163,6 @@ These features are:
 The ARFF files contain a rich set of statistical flow descriptors, including
 packet size statistics, timing information, and direction-based metrics.
 
-Unlike Scenario 1:
-- No custom feature extraction is performed
-- PCAP files are not reprocessed
-- Features are loaded directly from ARFF files and converted for model training
-
 This scenario serves as a **baseline comparison** against an established,
 author-defined feature representation.
 
